@@ -1,0 +1,81 @@
+Titulo I: Ocupación vía publica con mesas, sillas y demás
+Titulo II: Ocupación vía publica con toldos y voladizos
+
+Titulo III: Instalaciones en vía publica
+
+Titulo IV: Aprovechamientos especiales(Festividades)
+
+-----------------------------------CLASES PRINCIPALES-----------------------------------
+
+Titular
+	ID titular (int)
+	Nombre (string)
+	DNI/CIF (string)
+	Dirección (string)
+	Teléfono (string)
+	Correo electrónico (string)
+	Físico/Jurídico (enum)
+	Fecha registro (date)
+	N.º autorizaciones (int)
+
+Solicitud Autorizada
+	ID solicitud (int)
+	ID titular (int) [Relación con Titular]
+	Fecha solicitud (date)
+	Fecha admisión (date)
+	Vencimiento (date)
+	Horario autorizado (string)
+	N.º infracciones (int)
+	Espacio autorizado (string)
+	Hereda de:
+		Solicitud Autorizada Título III y IV
+			Descripción (string)
+			Tipo actividad (string)
+
+Infracciones
+	ID infracción (int)
+	ID establecimiento (int) [Relación con Establecimiento]
+	Tipo (string)
+	Fecha (date)
+	Multa (float)
+	Estado (enum)
+	Motivo (string)
+
+Elementos
+	ID elemento (int)
+	ID establecimiento (int) [Relación con Establecimiento]
+	Cantidad (int)
+	Tipo (string)
+	Estado (enum)
+	Superficie (float)
+	Ubicación (string)
+	Publicidad (string)
+	Fecha (date)
+	Tarifa (float)
+	Anclaje (bool)
+
+
+Establecimiento
+	ID establecimiento (int)
+	ID titular (int) [Relación con Titular]
+	Nombre (string)
+	Tipo (string)
+	Dirección (string)
+	Superficie (float)
+	Fecha Apertura (date)
+	Horario (string)
+	Actividad/observaciones (string)
+
+-----------------------------------RELACIONES Y HERENCIAS-----------------------------------
+
+Asociación:
+	Titular ↔ Solicitud Autorizada: Cada solicitud autorizada está asociada con un titular (1 a N).
+	Titular ↔ Establecimiento: Cada establecimiento está asociado con un titular (1 a N).
+	Establecimiento ↔ Infracciones: Cada infracción está asociada a un establecimiento (1 a N).
+	Establecimiento ↔ Elementos: Cada establecimiento tiene varios elementos (1 a N).
+
+Herencia:
+	Solicitud Autorizada hereda de Solicitud Autorizada (Título III y IV), agregando los atributos 	"Descripción" y "Tipo actividad".
+
+
+
